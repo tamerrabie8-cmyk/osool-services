@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أصول للخدمات والاستشارات الحكومية</title>
+    <style>
+        /* الألوان المستوحاة من الشعار والهوية البصرية */
+        :root {
+            --primary-blue: #0b2240; /* الأزرق الكحلي الداكن */
+            --gold: #c5a059;         /* الذهبي للمسات الجمالية */
+            --accent-blue: #0056b3;  /* الأزرق الحيوي للأزرار */
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --bg-light: #f8f9fa;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* الهيدر / شريط التنقل */
+        header {
+            background-color: var(--primary-blue);
+            border-bottom: 4px solid var(--gold);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-text h1 {
+            color: var(--text-light);
+            font-size: 22px;
+        }
+
+        .logo-text p {
+            color: var(--gold);
+            font-size: 12px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* القسم الرئيسي (Hero Section) المحدث بخلفية الفيديو */
+        .hero {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            text-align: center;
+            padding: 0 5%;
+            overflow: hidden;
+            border-bottom: 5px solid var(--gold);
+            background-color: var(--primary-blue);
+        }
+
+        /* تنسيق الفيديو ليمتد كخلفية كاملة */
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 0;
+            transform: translate(-50%, -50%);
+            opacity: 0.35; /* شفافية خفيفة لضمان وضوح الكلمات البيضاء فوقه */
+            object-fit: cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--gold);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+        }
+
+        .btn-main {
+            background-color: var(--gold);
+            color: var(--primary-blue);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s;
+            display: inline-block;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .btn-main:hover {
+            background-color: var(--text-light);
+        }
+
+        /* قسم الخدمات (3 أعمدة) */
+        .services-section {
+            padding: 60px 5%;
+            text-align: center;
+        }
+
+        .services-section h2 {
+            margin-bottom: 40px;
+            color: var(--primary-blue);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--gold);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .service-card ul {
+            list-style: none;
+            text-align: right;
+        }
+
+        .service-card ul li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-right: 20px;
+        }
+
+        .service-card ul li::before {
+            content: "✔";
+            position: absolute;
+            right: 0;
+            color: var(--gold);
+        }
+
+        /* قسم المغتربين الخاص */
+        .expats-section {
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            padding: 60px 5%;
+            text-align: center;
+            border-top: 4px solid var(--gold);
+        }
+
+        .expats-section h2 {
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .expats-features {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 5px;
+            min-width: 250px;
+        }
+
+        /* قسم نموذج طلب الخدمات ورفع المستندات */
+        .form-section {
+            padding: 60px 5%;
+            background-color: #f0f4f8;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .form-container h2 {
+            color: var(--primary-blue);
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #fafafa;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--gold);
+            outline: none;
+            background-color: #fff;
+        }
+
+        .btn-submit {
+            background-color: var(--primary-blue);
+            color: white;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--accent-blue);
+        }
+
+        /* الفوتر / التواصل */
+        footer {
+            background-color: #07162b;
+            color: var(--text-light);
+            padding: 40px 5% 20px;
+            border-top: 2px solid var(--gold);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-info h4 {
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .footer-info p {
+            margin-bottom: 8px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 15px; }
+            .nav-links { flex-direction: column; text-align: center; gap: 10px; }
+            .form-container { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <div class="logo-text">
+                <h1>أصول OSOOL</h1>
+                <p>للخدمات والاستشارات الحكومية</p>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">الرئيسية</a></li>
+            <li><a href="#services">خدماتنا</a></li>
+            <li><a href="#expats">خدمات المغتربين</a></li>
+            <li><a href="#order-form">طلب خدمة</a></li>
+            <li><a href="#contact">اتصل بنا</a></li>
+        </ul>
+    </header>
+
+    <section class="hero" id="home">
+        <video class="hero-video" autoplay loop muted playsinline>
+            <source
+ src="video.mp4" type="video/mp4">.
+        </video>
+        <div class="hero-content">
+            <h2>أصول للخدمات والاستشارات الحكومية</h2>
+            <p>استخراج كافة المستندات الحكومية الرسمية بكل سهولة وبدون الحاجة لعمل توكيل، نتميز بالسرعة والدقة القانونية المتناهية لتلبية احتياجاتكم.</p>
+            <a href="#order-form" class="btn-main">قدم طلبك الآن رقمياً</a>
+        </div>
+    </section>
+
+    <section class="services-section" id="services">
+        <h2>خدماتنا الرئيسية</h2>
+        <div class="services-grid">
+            
+            <div class="service-card">
+                <h3>المعاملات الرسمية والتوثيق</h3>
+                <ul>
+                    <li>شهادات رسمية (ميلاد، زواج، طلاق)</li>
+                    <li>قيد عائلي وقيد فردي دقيق</li>
+                    <li>توثيق الخارجية المصرية</li>
+                    <li>معاملات الشهر العقاري ووزارة العدل</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <h3>الاستشارات والترجمة</h3>
+                <ul>
+                    <li>استشارات قانونية متكاملة</li>
+                    <li>تخليص وتسهيل المعاملات الحكومية المعقدة</li>
+                    <li>ترجمة معتمدة لجميع اللغات (لكافة السفارات)</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <h3>خدمات المغتربين بالخارج</h3>
+                <ul>
+                    <li>تجديد وإصدار بطاقات الرقم القومي</li>
+                    <li>تجديد وإصدار جوازات السفر وتصاريح العمل</li>
+                    <li>استخراج شهادات الميلاد لمواليد الخارج</li>
+                    <li>تصديق المستندات والشهادات الجامعية</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="expats-section" id="expats">
+        <h2>المميزات التنافسية لخدمات المغتربين</h2>
+        <p>نهتم برعاية وإنهاء مصالح المصريين بالخارج وتوفير الوقت والجهد بأعلى كفاءة.</p>
+        <div class="expats-features">
+            <div class="feature-item">⏱ زمن قياسي في التنفيذ</div>
+            <div class="feature-item">🚶‍♂️ بدون الوقوف في أي طوابير</div>
+            <div class="feature-item">💰 أفضل الأسعار التنافسية</div>
+        </div>
+    </section>
+
+    <section class="form-section" id="order-form">
+        <div class="form-container">
+            <h2>نموذج تقديم الطلبات ورفع المستندات</h2>
+            <form action="#" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="name">الاسم الكامل:</label>
+                    <input type="text" id="name" name="name" placeholder="أدخل اسمك الثلاثي" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">رقم الهاتف (واتساب):</label>
+                    <input type="tel" id="phone" name="phone" placeholder="مثال: 01116922660" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="service-type">نوع الخدمة المطلوبة:</label>
+                    <select id="service-type" name="service-type" required>
+                        <option value="">-- اختر الخدمة --</option>
+                        <option value="id-card">تجديد/إصدار رقم قومي (مغتربين)</option>
+                        <option value="passport">تجديد/إصدار جواز سفر</option>
+                        <option value="certificates">استخراج شهادات رسمية وتصديقات</option>
+                        <option value="translation">ترجمة معتمدة واستشارات</option>
+                        <option value="other">معاملة حكومية أخرى</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="file-upload">ارفاق المستندات إن وجدت (جواز السفر/البطاقة القديمة):</label>
+                    <input type="file" id="file-upload" name="file-upload" accept=".jpg, .jpeg, .png, .pdf">
+                </div>
+
+                <div class="form-group">
+                    <label for="details">تفاصيل إضافية حول المعاملة:</label>
+                    <textarea id="details" name="details" rows="4" placeholder="اكتب هنا أي تفاصيل أو شروط خاصة بطلبك..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">إرسال الطلب للمراجعة</button>
+            </form>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-info">
+                <h4>اتصل بنا</h4>
+                <p><strong>الهاتف:</strong> 01116922660</p>
+                <p><strong>العنوان:</strong> مصر، القاهرة، شارع الخمسين - زهراء المعادي</p>
+                <p><strong>الرقم البريدي:</strong> 11742</p>
+            </div>
+            <div class="footer-info">
+                <h4>روابط سريعة</h4>
+                <p><a href="https://facebook.com" target="_blank" style="color: var(--gold); text-decoration: none;">تابعنا على فيسبوك</a></p>
+                <p>ساعات العمل: متواجدون لخدمتكم دائماً</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 أصول للخدمات والاستشارات الحكومية. جميع الحق الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
