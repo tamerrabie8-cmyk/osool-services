@@ -1,0 +1,15 @@
+
+*{box-sizing:border-box}body{margin:0;font-family:Tahoma;background:#f4f7fb}
+nav{display:flex;justify-content:space-between;padding:15px 8%;background:#0d47a1;color:#fff}
+nav ul{display:flex;gap:20px;list-style:none}nav a{color:#fff;text-decoration:none}
+.hero{padding:120px 20px;text-align:center;background:linear-gradient(135deg,#0d47a1,#1976d2);color:#fff}
+.btn{background:#ffc107;padding:12px 24px;border-radius:30px;text-decoration:none;color:#000}
+section{padding:60px 8%}h2{text-align:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card{background:#fff;padding:30px;border-radius:15px;box-shadow:0 3px 10px rgba(0,0,0,.1)}
+.about{text-align:center;background:#fff}
+form{max-width:600px;margin:auto;display:flex;flex-direction:column;gap:10px}
+input,textarea,button{padding:12px;border:1px solid #ccc;border-radius:8px}
+button{background:#0d47a1;color:#fff}
+.whatsapp{position:fixed;bottom:20px;left:20px;background:#25D366;color:#fff;padding:15px 20px;border-radius:30px;text-decoration:none}
+footer{text-align:center;padding:20px;background:#092c63;color:#fff}
