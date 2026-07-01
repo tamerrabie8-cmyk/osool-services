@@ -100,22 +100,62 @@ document.querySelectorAll(".service-card, .why-card, .process-card, .stat-item, 
 });
 
 // --- 5. شريط آراء العملاء (تلقائي) ---
+// --- 5. شريط آراء العملاء (تلقائي مع نقاط تحكم تفاعلية ذكية) ---
 const testimonials = document.querySelectorAll(".testimonial");
-if (testimonials.length > 0) {
-    let currentTestimonial = 0;
+const sliderContainer = document.querySelector(".testimonial-slider");
 
-    const showTestimonial = (index) => {
+if (testimonials.length > 0 && sliderContainer) {
+    let currentTestimonial = 0;
+    let timer;
+
+    // إنشاء حاوية النقاط ديناميكياً لتوفير عناء تعديل ملف HTML عليك
+    const dotsContainer = document.createElement("div");
+    dotsContainer.className = "testimonial-dots";
+    sliderContainer.appendChild(dotsContainer);
+
+    // إنشاء نقطة تحكم لكل رأي عميل موجود في موقعك
+    testimonials.forEach((_, index) => {
+        const dot = document.createElement("span");
+        dot.className = `slider-dot ${index === 0 ? "active" : ""}`;
+        
+        // عند ضغط المستخدم على أي نقطة
+        dot.addEventListener("click", () => {
+            currentTestimonial = index;
+            updateSlider();
+            resetTimer(); // إيقاف وإعادة تشغيل المؤقت حتى لا يقلب التقييم فوراً أثناء قراءته
+        });
+        dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll(".slider-dot");
+
+    // وظيفة لتحديث السلايدر والنقاط النشطة
+    const updateSlider = () => {
         testimonials.forEach(item => item.classList.remove("active"));
-        testimonials[index].classList.add("active");
+        dots.forEach(dot => dot.classList.remove("active"));
+        
+        testimonials[currentTestimonial].classList.add("active");
+        dots[currentTestimonial].classList.add("active");
     };
 
-    showTestimonial(currentTestimonial);
+    // تشغيل الحركة التلقائية
+    const startTimer = () => {
+        timer = setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            updateSlider();
+        }, 6000);
+    };
 
-    setInterval(() => {
-        currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-        showTestimonial(currentTestimonial);
-    }, 6000); // زيادة الوقت قليلاً لقراءة أفضل
+    const resetTimer = () => {
+        clearInterval(timer);
+        startTimer();
+    };
+
+    // إطلاق السلايدر عند تحميل الصفحة
+    updateSlider();
+    startTimer();
 }
+
 
 // --- 6. الأسئلة الشائعة (محسّن) ---
 const faqItems = document.querySelectorAll(".faq-item");

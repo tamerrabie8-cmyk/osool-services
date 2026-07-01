@@ -736,24 +736,23 @@ FAQ
     font-weight:700;
 
 }
-
-.faq-answer{
-
-    display:none;
-
-    padding:0 25px 25px;
-
-    color:#666;
-
-    line-height:1.9;
-
+.faq-answer {
+    max-height: 0;          /* إخفاء الإجابة عبر جعل الارتفاع صفراً */
+    overflow: hidden;       /* منع ظهور النص خارج حدود الحاوية المخفية */
+    padding: 0 25px;        /* إلغاء الـ padding السفلي مؤقتاً لتجنب القفزات الحركية */
+    color: #666;
+    line-height: 1.9;
+    opacity: 0;             /* جعل النص شفافاً تماماً في البداية */
+    /* حركة عالمية تجمع بين تمدد الارتفاع وظهور النص تدريجياً بنعومة فائقة */
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, padding 0.4s ease;
 }
 
-.faq-item.active .faq-answer{
-
-    display:block;
-
+.faq-item.active .faq-answer {
+    max-height: 500px;      /* إعطاء مساحة كافية ومفتوحة للنص ليتمدد بداخلها */
+    padding: 0 25px 25px;   /* إعادة الـ padding السفلي عند الفتح */
+    opacity: 1;             /* إظهار النص بالكامل */
 }
+
 
 /*====================================================
 CONTACT
@@ -1272,4 +1271,33 @@ footer {
 }
 .faq-item.active .faq-question::after {
     transform: translateY(-50%) rotate(180deg);
+}
+/* ====================================================
+   تصميم نقاط التحكم التفاعلية لآراء العملاء (العالمية)
+   ==================================================== */
+.testimonial-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.slider-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(11, 46, 89, 0.2); /* لون كحلي شفاف للنقاط غير النشطة */
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slider-dot:hover {
+    background: rgba(11, 46, 89, 0.5);
+}
+
+.slider-dot.active {
+    background: var(--secondary); /* النقطة النشطة تأخذ اللون الذهبي الملكي */
+    transform: scale(1.1);
+    width: 32px;                 /* تتمدد النقطة لتصبح مستطيلاً انسيابياً رائعاً */
+    border-radius: 6px;          /* حواف ناعمة للمستطيل */
 }
