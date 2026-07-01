@@ -103,37 +103,24 @@ header{
 }
 
 .navbar{
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
-    min-height:clamp(80px,9vw,110px);
-
-    padding-inline:clamp(18px,3vw,40px);
-
+    min-height:130px;
+    padding:0 30px;
 }
-
-/*=========================
-LOGO
-=========================*/
-
 .logo{
     display:flex;
     align-items:center;
-    height:100%;
 }
 
 .logo img{
-    height:85%;
     width:auto;
-    max-height:95px;
+    height:130px;
+    max-height:none;
     object-fit:contain;
     transition:0.3s ease;
 }
-
 /*=========================
 MENU
 =========================*/
