@@ -1058,3 +1058,211 @@ SMALL DEVICES
     }
 
 }
+/* ====================================================
+   OSOOL - ENHANCEMENTS FOR A WORLD-CLASS LOOK & FEEL
+   ==================================================== */
+
+/* 1. تحسينات عامة على الجسم والخطوط */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #f8fafc; /* لون خلفية أنقى قليلاً */
+}
+
+/* 2. تحسين الـ Navbar وجعله أكثر انسيابية */
+header {
+    transition: background 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
+}
+
+/* كلاس سيتم إضافته ديناميكيًا عبر JS عند التمرير */
+header.scrolled {
+    background: rgba(7, 27, 70, 0.97) !important; /* لون كحلي أعمق وأكثر احترافية */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
+    padding: 10px 0; /* تصغير ارتفاع الهيدر قليلاً عند التمرير */
+}
+
+.nav-menu a {
+    position: relative;
+    padding-bottom: 5px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+/* خط أنيق يظهر أسفل الرابط النشط أو عند التحويم */
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--secondary);
+    transition: width 0.3s ease;
+}
+
+.nav-menu a:hover::after,
+.nav-menu a.active::after {
+    width: 100%;
+}
+
+/* 3. تحسينات قسم Hero */
+.hero-overlay {
+    background: linear-gradient(135deg, rgba(7, 27, 70, 0.92) 0%, rgba(11, 46, 89, 0.8) 100%);
+}
+
+.hero h1 {
+    letter-spacing: 3px;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    animation: fadeInDown 1s ease;
+}
+
+.hero h2 {
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.gold-btn, .white-btn {
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.5px;
+    font-size: 16px;
+    font-weight: 700;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* تأثير لامع على الأزرار */
+.gold-btn::after, .white-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 50%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(25deg);
+    transition: left 0.6s ease;
+}
+
+.gold-btn:hover::after, .white-btn:hover::after {
+    left: 120%;
+}
+
+/* 4. تحسينات البطاقات */
+.service-card, .why-card, .process-card {
+    border: 1px solid rgba(0,0,0,0.03);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.service-card:hover, .why-card:hover {
+    border-top-color: var(--secondary); /* للـ why-card عند التحويم */
+    border-bottom-color: var(--secondary); /* للـ service-card */
+}
+
+.service-card i, .why-card i, .process-card i {
+    transition: transform 0.4s ease, color 0.3s ease;
+}
+
+.service-card:hover i, .why-card:hover i, .process-card:hover i {
+    transform: scale(1.1);
+    color: #b8941f; /* درجة ذهبي أغمق قليلاً */
+}
+
+/* 5. تحسينات عملية الخطوات */
+.step-number {
+    font-size: 20px;
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+    transition: transform 0.3s ease;
+}
+.process-card:hover .step-number {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* 6. تحسينات شريط الإحصائيات */
+.stat-item {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.stat-item h2 {
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+/* 7. تحسينات قسم آراء العملاء */
+.testimonial {
+    border-left: 4px solid var(--secondary);
+    position: relative;
+}
+.testimonial::before {
+    content: '\201C'; /* علامة تنصيص كبيرة */
+    font-size: 120px;
+    color: rgba(212, 175, 55, 0.15);
+    position: absolute;
+    top: -20px;
+    left: 30px;
+    font-family: serif;
+    line-height: 1;
+}
+
+/* 8. تحسينات نموذج التواصل */
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+    transform: translateY(-2px);
+}
+
+.contact-form button.gold-btn {
+    width: 100%;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 16px;
+    transition: all 0.4s ease;
+}
+.contact-form button.gold-btn:hover {
+    letter-spacing: 1px;
+}
+
+/* 9. تحسينات الفوتر */
+footer {
+    background: #051530; /* لون أغمق */
+}
+.footer-content a {
+    display: inline-block;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+.footer-content a:hover {
+    transform: translateX(-6px); /* حركة لليسار في العربي */
+    color: var(--secondary);
+}
+
+/* 10. تحسينات الأزرار الجانبية */
+.whatsapp, #topBtn {
+    animation: float 3s ease-in-out infinite;
+}
+.whatsapp:hover, #topBtn:hover {
+    animation-play-state: paused;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* 11. تحسينات الأسئلة الشائعة */
+.faq-question {
+    position: relative;
+    transition: color 0.3s ease;
+}
+.faq-question::after {
+    content: '\f107'; /* أيقونة سهم للأسفل من FontAwesome */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.4s ease;
+    color: var(--secondary);
+}
+.faq-item.active .faq-question::after {
+    transform: translateY(-50%) rotate(180deg);
+}
