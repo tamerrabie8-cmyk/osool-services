@@ -15,19 +15,19 @@ RESET
     box-sizing:border-box;
 }
 
-:root{
-
-    --primary:#0B2E59;
-    --secondary:#D4AF37;
-    --white:#ffffff;
-    --light:#f5f7fb;
-    --text:#444;
-    --border:#e6e6e6;
-
-    --shadow:0 10px 30px rgba(0,0,0,.08);
-
-    --radius:18px;
-
+:root {
+    --primary: #0B2E59;     /* اللون الكحلي الفاخر المستوحى من شعارك */
+    --secondary: #D4AF37;   /* اللون الذهبي الملكي */
+    --white: #ffffff;
+    --light: #f8fafc;       /* درجة أفتح وأنقى قليلاً مريحة للعين */
+    --text: #334155;        /* لون نصوص مائل للرمادي الداكن المريح بدلاً من الأسود الحاد */
+    --border: #f1f5f9;      /* حدود ناعمة جداً */
+    
+    /* ظلال عالمية مطورة فائقة النعومة والجمال */
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(11, 46, 89, 0.03);
+    --shadow-hover: 0 20px 25px -5px rgba(11, 46, 89, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    
+    --radius: 16px;         /* زوايا انسيابية وعصرية للبطاقات */
 }
 
 html{
@@ -82,25 +82,20 @@ ul{
 HEADER
 =========================*/
 
-header{
-
-    position:fixed;
-
-    top:0;
-
-    left:0;
-
-    width:100%;
-
-    background:rgba(11,46,89,.95);
-
-    backdrop-filter:blur(12px);
-
-    z-index:1000;
-
-    transition:.35s;
-
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* خلفية كحلية شفافة تتيح رؤية المحتوى خلفها بنعومة */
+    background: rgba(11, 46, 89, 0.75); 
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px); /* تأثير ضبابي زجاجي عالي الجودة */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* خط سفلي نحيف جداً يعطي إيحاءً بالزجاج المقطوع */
+    z-index: 1000;
+    transition: all 0.4s ease;
 }
+
 
 .navbar{
 
@@ -398,20 +393,25 @@ SERVICES
     gap:30px;
 }
 
-.service-card{
-    background:#fff;
-    border-radius:var(--radius);
-    padding:40px 30px;
-    text-align:center;
-    box-shadow:var(--shadow);
-    transition:.35s ease;
-    border-top:5px solid transparent;
+.service-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(11, 46, 89, 0.03); /* حواف غير مرئية تقريباً تبرز عند التحويم */
+    border-top: 4px solid transparent;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); /* حركة انسيابية مأخوذة من معايير التصميم العالمية */
 }
 
-.service-card:hover{
-    transform:translateY(-10px);
-    border-top-color:var(--secondary);
+.service-card:hover {
+    transform: translateY(-8px);
+    border-top-color: var(--secondary);
+    border-right: 1px solid rgba(212, 175, 55, 0.1);
+    border-left: 1px solid rgba(212, 175, 55, 0.1);
+    box-shadow: var(--shadow-hover); /* استخدام الظل المطور عالي النعومة */
 }
+
 
 .service-card i{
     font-size:56px;
@@ -492,19 +492,24 @@ STATISTICS
     grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
     gap:25px;
 }
-
-.stat-item{
-    background:rgba(255,255,255,.08);
-    backdrop-filter:blur(10px);
-    border-radius:20px;
-    text-align:center;
-    padding:40px 20px;
-    transition:.3s;
+.stat-item {
+    background: rgba(255, 255, 255, 0.05); /* تقليل حدة الخلفية لزيادة النقاء البصري */
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    text-align: center;
+    padding: 40px 20px;
+    /* حد زجاجي مضيء يظهر جمال الخلفية المتدرجة خلفه */
+    border: 1px solid rgba(255, 255, 255, 0.12); 
+    box-shadow: 0 8px 32px 0 rgba(5, 21, 48, 0.2);
+    transition: all 0.4s ease;
+}
+.stat-item:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.09); /* تضيء البطاقة أكثر عند مرور الماوس فوقها */
+    border-color: rgba(212, 175, 55, 0.4); /* تكتسب الحواف لمحة ذهبية خفيفة */
 }
 
-.stat-item:hover{
-    transform:translateY(-8px);
-}
 
 .stat-item h2{
     color:var(--secondary);
@@ -1076,10 +1081,12 @@ header {
 
 /* كلاس سيتم إضافته ديناميكيًا عبر JS عند التمرير */
 header.scrolled {
-    background: rgba(7, 27, 70, 0.97) !important; /* لون كحلي أعمق وأكثر احترافية */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
-    padding: 10px 0; /* تصغير ارتفاع الهيدر قليلاً عند التمرير */
+    background: rgba(7, 27, 70, 0.85) !important; 
+    box-shadow: 0 10px 30px rgba(5, 21, 48, 0.3) !important;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2) !important; /* يتحول الخط السفلي للون الذهبي الهادئ عند التمرير */
+    padding: 5px 0;
 }
+
 
 .nav-menu a {
     position: relative;
