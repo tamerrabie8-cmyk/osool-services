@@ -1,161 +1,82 @@
-/* ==========================================
-   Osool Website
-   Main JavaScript
-========================================== */
+/*==================================================
+OSOOL WEBSITE
+Main JavaScript
+==================================================*/
 
-// تغيير شكل شريط التنقل عند التمرير
-window.addEventListener("scroll", () => {
-    const header = document.querySelector("header");
+/*==========================
+Mobile Menu
+==========================*/
 
-    if (window.scrollY > 80) {
-        header.style.background = "#071b46";
-        header.style.boxShadow = "0 10px 25px rgba(0,0,0,.25)";
-    } else {
-        header.style.background = "rgba(10,30,70,.95)";
-        header.style.boxShadow = "none";
-    }
-});
+const menuBtn = document.querySelector(".menu-btn");
+const navMenu = document.querySelector(".nav-menu");
 
-// تأثير ظهور العناصر أثناء التمرير
-const observer = new IntersectionObserver((entries) => {
+if(menuBtn){
 
-    entries.forEach(entry => {
+menuBtn.addEventListener("click",()=>{
 
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
-        }
-
-    });
-
-}, {
-    threshold: 0.2
-});
-
-document.querySelectorAll(".card, .about-text, .about-image, .contact form")
-.forEach(el => {
-
-    el.style.opacity = "0";
-    el.style.transform = "translateY(40px)";
-    el.style.transition = "all .8s ease";
-
-    observer.observe(el);
+navMenu.classList.toggle("active");
 
 });
-
-// تأثير الضغط على الأزرار
-document.querySelectorAll(".btn, .gold-btn, .white-btn")
-.forEach(button => {
-
-    button.addEventListener("click", function () {
-
-        this.style.transform = "scale(.95)";
-
-        setTimeout(() => {
-            this.style.transform = "scale(1)";
-        }, 150);
-
-    });
-
-});
-
-// رسالة عند إرسال النموذج
-const form = document.querySelector("form");
-
-if (form) {
-
-    form.addEventListener("submit", function (e) {
-
-        e.preventDefault();
-
-        alert("شكراً لتواصلك معنا، سيتم الرد عليك في أقرب وقت.");
-
-        form.reset();
-
-    });
 
 }
 
-// زر العودة للأعلى
-const topButton = document.createElement("button");
+document.querySelectorAll(".nav-menu a").forEach(link=>{
 
-topButton.innerHTML = "↑";
-topButton.id = "topBtn";
+link.addEventListener("click",()=>{
 
-document.body.appendChild(topButton);
-
-topButton.style.position = "fixed";
-topButton.style.bottom = "25px";
-topButton.style.left = "25px";
-topButton.style.width = "50px";
-topButton.style.height = "50px";
-topButton.style.border = "none";
-topButton.style.borderRadius = "50%";
-topButton.style.background = "#d4af37";
-topButton.style.color = "#071b46";
-topButton.style.fontSize = "24px";
-topButton.style.cursor = "pointer";
-topButton.style.display = "none";
-topButton.style.zIndex = "999";
-
-window.addEventListener("scroll", () => {
-
-    if (window.scrollY > 400) {
-
-        topButton.style.display = "block";
-
-    } else {
-
-        topButton.style.display = "none";
-
-    }
+navMenu.classList.remove("active");
 
 });
 
-topButton.addEventListener("click", () => {
-
-    window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
-    });
-
 });
 
-// سنة تلقائية في الفوتر
-const footer = document.querySelector("footer p");
+/*==========================
+Header Scroll
+==========================*/
 
-if (footer) {
+const header=document.querySelector("header");
 
-    footer.innerHTML =
-        `© ${new Date().getFullYear()} Osool Government Services & Consultancy`;
+window.addEventListener("scroll",()=>{
+
+if(window.scrollY>80){
+
+header.style.background="#071b46";
+header.style.boxShadow="0 10px 25px rgba(0,0,0,.20)";
+
+}else{
+
+header.style.background="rgba(11,46,89,.96)";
+header.style.boxShadow="none";
 
 }
 
-console.log("Osool Website Loaded Successfully");
-// Animated Counter
+});
+
+/*==========================
+Animated Counter
+==========================*/
 
 const counters=document.querySelectorAll(".counter");
 
-counters.forEach(counter=>{
+const runCounter=()=>{
 
-const update=()=>{
+counters.forEach(counter=>{
 
 const target=+counter.dataset.target;
 
-const count=+counter.innerText;
+let count=0;
 
-const speed=60;
+const speed=target/80;
 
-const inc=target/speed;
+const update=()=>{
+
+count+=speed;
 
 if(count<target){
 
-counter.innerText=Math.ceil(count+inc);
+counter.innerText=Math.ceil(count);
 
-setTimeout(update,30);
+requestAnimationFrame(update);
 
 }else{
 
@@ -168,15 +89,218 @@ counter.innerText=target;
 update();
 
 });
-// تأثير بسيط عند المرور بالفأرة
-document.querySelectorAll(".why-card").forEach(card => {
 
-    card.addEventListener("mouseenter", () => {
-        card.style.transform = "translateY(-12px) scale(1.03)";
-    });
+};
 
-    card.addEventListener("mouseleave", () => {
-        card.style.transform = "translateY(0) scale(1)";
+let counterStarted=false;
+
+const stats=document.querySelector(".statistics");
+
+window.addEventListener("scroll",()=>{
+
+if(stats){
+
+const top=stats.offsetTop-400;
+
+if(window.scrollY>=top&&!counterStarted){
+
+counterStarted=true;
+
+runCounter();
+
+}
+
+}
+
+});
+
+/*==========================
+Scroll Animation
+==========================*/
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("show");
+
+}
+
+});
+
+},{
+threshold:.2
+});
+
+document.querySelectorAll(
+".service-card,.why-card,.process-card,.stat-item,.about-image,.about-content"
+).forEach(el=>{
+
+el.classList.add("fade-up");
+
+observer.observe(el);
+
+});/*==================================================
+Testimonials Slider
+==================================================*/
+
+const testimonials = document.querySelectorAll(".testimonial");
+
+if (testimonials.length > 0) {
+
+    let current = 0;
+
+    function showSlide(index) {
+
+        testimonials.forEach(item => {
+            item.classList.remove("active");
+        });
+
+        testimonials[index].classList.add("active");
+    }
+
+    showSlide(current);
+
+    setInterval(() => {
+
+        current++;
+
+        if (current >= testimonials.length) {
+            current = 0;
+        }
+
+        showSlide(current);
+
+    }, 5000);
+
+}
+
+/*==================================================
+FAQ Accordion
+==================================================*/
+
+const faqItems = document.querySelectorAll(".faq-item");
+
+faqItems.forEach(item => {
+
+    const question = item.querySelector(".faq-question");
+
+    question.addEventListener("click", () => {
+
+        faqItems.forEach(other => {
+
+            if (other !== item) {
+                other.classList.remove("active");
+            }
+
+        });
+
+        item.classList.toggle("active");
+
     });
 
 });
+
+/*==================================================
+Back To Top Button
+==================================================*/
+
+const topBtn = document.getElementById("topBtn");
+
+window.addEventListener("scroll", () => {
+
+    if (topBtn) {
+
+        if (window.scrollY > 400) {
+
+            topBtn.style.display = "flex";
+
+        } else {
+
+            topBtn.style.display = "none";
+
+        }
+
+    }
+
+});
+
+if (topBtn) {
+
+    topBtn.addEventListener("click", () => {
+
+        window.scrollTo({
+
+            top: 0,
+            behavior: "smooth"
+
+        });
+
+    });
+
+}
+
+/*==================================================
+Contact Form
+==================================================*/
+
+const contactForm = document.querySelector(".contact-form");
+
+if (contactForm) {
+
+    contactForm.addEventListener("submit", function(e){
+
+        e.preventDefault();
+
+        alert("تم إرسال رسالتك بنجاح، وسنتواصل معك في أقرب وقت.");
+
+        contactForm.reset();
+
+    });
+
+}
+
+/*==================================================
+Smooth Active Menu
+==================================================*/
+
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".nav-menu a");
+
+window.addEventListener("scroll", () => {
+
+    let currentSection = "";
+
+    sections.forEach(section => {
+
+        const sectionTop = section.offsetTop - 120;
+
+        if (window.scrollY >= sectionTop) {
+
+            currentSection = section.getAttribute("id");
+
+        }
+
+    });
+
+    navLinks.forEach(link => {
+
+        link.classList.remove("active");
+
+        if (link.getAttribute("href") === "#" + currentSection) {
+
+            link.classList.add("active");
+
+        }
+
+    });
+
+});
+
+/*==================================================
+Console
+==================================================*/
+
+console.log("✅ Osool Website Loaded Successfully");
