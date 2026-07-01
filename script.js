@@ -197,12 +197,47 @@ window.addEventListener("scroll", () => {
 });
 
 // --- 8. نموذج التواصل (محسّن) ---
+// --- 8. نموذج التواصل التفاعلي الاحترافي (بدون Alert التقليدي) ---
 if (contactForm) {
     contactForm.addEventListener("submit", function(e) {
         e.preventDefault();
-        // يمكن استبدال هذا بطلب إرسال حقيقي إلى خادم
-        alert("تم إرسال رسالتك بنجاح! سنتواصل معك في أقرب وقت.");
-        this.reset();
+        
+        const submitBtn = this.querySelector("button[type='submit']");
+        const originalText = submitBtn.innerHTML;
+        
+        // 1. تحويل الزر فوراً لحالة التحميل (Loading) ومنع الضغط المتكرر
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري إرسال رسالتك...';
+        submitBtn.style.pointerEvents = 'none';
+        submitBtn.style.opacity = '0.8';
+        
+        // محاكاة عملية إرسال حقيقية تستغرق ثانية ونصف
+        setTimeout(() => {
+            // 2. إنشاء حاوية رسالة نجاح زجاجية جذابة تظهر أسفل النموذج
+            const successMessage = document.createElement("div");
+            successMessage.className = "form-success-msg";
+            successMessage.innerHTML = '<i class="fas fa-circle-check"></i> تم إرسال رسالتك بنجاح! سنتواصل معك في أقرب وقت.';
+            
+            // إزالة أي رسالة نجاح قديمة إذا كانت موجودة لمنع التكرار
+            const oldMsg = contactForm.querySelector(".form-success-msg");
+            if (oldMsg) oldMsg.remove();
+            
+            // إضافة الرسالة الجديدة داخل النموذج
+            contactForm.appendChild(successMessage);
+            
+            // 3. إعادة الزر لوضعه الطبيعي وتصفير الحقول ليصبح جاهزاً مرة أخرى
+            submitBtn.innerHTML = originalText;
+            submitBtn.style.pointerEvents = 'auto';
+            submitBtn.style.opacity = '1';
+            contactForm.reset();
+            
+            // 4. إخفاء رسالة النجاح تلقائياً بعد 5 ثوانٍ بنعومة تامة
+            setTimeout(() => {
+                successMessage.style.opacity = '0';
+                successMessage.style.transform = 'translateY(10px)';
+                setTimeout(() => successMessage.remove(), 400); // حذفها نهائياً من الكود بعد انتهاء الحركة
+            }, 5000);
+            
+        }, 1500); // وقت الانتظار الافتراضي للمحاكاة
     });
 }
 
@@ -217,3 +252,33 @@ if (topBtn) {
 }
 
 console.log("✅ Osool Pro | موقع احترافي جاهز للانطلاق");
+// --- 10. ميزة الوضع الداكن / المضيء الفاخر مع الحفظ التلقائي في المتصفح ---
+const themeToggleBtn = document.getElementById("themeToggle");
+
+// التحقق الفوري عند تحميل الصفحة إذا كان المستخدم قد اختار الوضع الداكن سابقاً
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme === "dark") {
+    document.body.classList.add("dark-theme");
+    if (themeToggleBtn) {
+        themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>'; // تحويل الأيقونة لشمس
+    }
+}
+
+// برمجة حدث الضغط على الزر للتبديل السلس
+if (themeToggleBtn) {
+    themeToggleBtn.addEventListener("click", () => {
+        document.body.classList.toggle("dark-theme");
+        
+        let theme = "light";
+        // إذا تحول الموقع للوضع الداكن
+        if (document.body.classList.contains("dark-theme")) {
+            theme = "dark";
+            themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>'; // شمس للعودة للمضيء
+        } else {
+            themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i>'; // هلال للتحويل للداكن
+        }
+        
+        // حفظ خيار المستخدم الحالي في ذاكرة المتصفح المحلية
+        localStorage.setItem("theme", theme);
+    });
+}

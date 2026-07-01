@@ -115,27 +115,34 @@ header {
 LOGO
 =========================*/
 
-.logo{
-
-    display:flex;
-
-    align-items:center;
-
-    flex-shrink:0;
-
+.navbar .logo {
+    display: flex;
+    align-items: center;
+    overflow: visible; /* السماح للشعار بالظهور كاملاً */
 }
 
-.logo img{
-
-    width:auto;
-
-    height:clamp(70px,8vw,110px);
-
-    object-fit:contain;
-
-    transition:.3s;
-
+.navbar .logo img {
+    height: 140px;         /* رقم كبير ليعوض الفراغ الشفاف داخل الصورة نفسها */
+    width: auto;
+    transform: scale(1.6);  /* تكبير اللوجو الفعلي الداخلي بنسبة 60% */
+    margin-top: -5px;      /* وزنه عمودياً داخل الهيدر */
+    transition: all 0.3s ease;
 }
+
+/* ضبط الأبعاد عند نزول الصفحة لأسفل */
+header.scrolled .navbar .logo img {
+    height: 110px;
+    transform: scale(1.4);
+}
+
+/* ضبط الأبعاد للشاشات الصغيرة (الموبايل) */
+@media (max-width: 768px) {
+    .navbar .logo img {
+        height: 100px;
+        transform: scale(1.4);
+    }
+}
+
 
 /*=========================
 MENU
@@ -1208,23 +1215,13 @@ header.scrolled {
     line-height: 1;
 }
 
-/* 8. تحسينات نموذج التواصل */
+/* 8. تحسينات نموذج التواصل وإضاءة الحقول الفاخرة */
 .contact-form input:focus,
 .contact-form textarea:focus {
-    border-color: var(--secondary);
-    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
-    transform: translateY(-2px);
-}
-
-.contact-form button.gold-btn {
-    width: 100%;
-    cursor: pointer;
-    font-size: 18px;
-    padding: 16px;
-    transition: all 0.4s ease;
-}
-.contact-form button.gold-btn:hover {
-    letter-spacing: 1px;
+    border-color: var(--primary); /* تكتسب الحواف لون موقعك الكحلي الأساسي عند التفاعل */
+    box-shadow: 0 10px 25px rgba(11, 46, 89, 0.05), 0 0 0 4px rgba(11, 46, 89, 0.1);
+    transform: translateY(-3px); /* ترتفع للأعلى بنعومة تامة لإشعار المستخدم بالتركيز */
+    outline: none;
 }
 
 /* 9. تحسينات الفوتر */
@@ -1300,4 +1297,39 @@ footer {
     transform: scale(1.1);
     width: 32px;                 /* تتمدد النقطة لتصبح مستطيلاً انسيابياً رائعاً */
     border-radius: 6px;          /* حواف ناعمة للمستطيل */
+}
+/* ====================================================
+   تصميم رسالة النجاح الانسيابية المدمجة لنموذج التواصل
+   ==================================================== */
+.form-success-msg {
+    margin-top: 20px;
+    padding: 15px 20px;
+    background: rgba(40, 167, 69, 0.1); /* خلفية خضراء شفافة ومريحة */
+    border: 1px solid rgba(40, 167, 69, 0.2);
+    color: #28a745; /* لون الخط الأخضر الخاص بالنجاح */
+    border-radius: var(--radius);
+    text-align: center;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    animation: slideInUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; /* حركة ظهور حيوية وممتعة */
+    transition: all 0.4s ease;
+}
+
+.form-success-msg i {
+    font-size: 20px; /* تكبير أيقونة الصح */
+}
+
+/* حركة صعود الرسالة من الأسفل للأعلى بنعومة */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
